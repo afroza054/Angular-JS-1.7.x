@@ -1,0 +1,111 @@
+﻿<div class="card">
+    <div class="card-header bg-success text-white">
+        <h2 class="card-title">Online Job Site</h2>
+
+    </div>
+    <div class="card-body">
+        <div class="d-flex justify-content-end mb-1">
+            <a ng-href="#!/createOnlineJobSite" class="btn btn-success btn-sm"><span class="fa fa-plus">Multi Create</span></a>
+        </div>
+        <div class="card-text"></div>
+        <table class="table table-bordered table-light">
+            <thead class="thead-dark">
+                <tr>
+                   <th>...</th>
+                    <th>OnlineJobSite Name</th>
+                    <th>Started Journey</th>
+                    <th>WebSite</th>
+                    <th>Response Instantly</th>
+                    <th>Multi Edit & Del</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="data in model.onlineJobSites">
+                <tr>
+
+                    <td>
+                        <button ng-if="!data.isExpanded" class="btn" ng-click="expandChild($index)"><i class="fa fa-plus"></i></button>
+                        <button ng-if="data.isExpanded" class="btn" ng-click="expandChild($index)"><i class="fa fa-minus"></i></button>
+                    </td>
+                    <td>{{data.onlineJobSite.OnlineJobSiteName}}</td>
+                    <td>{{data.onlineJobSite.StartedJourney |date: 'yyyy-MM-dd'}}</td>
+                    <td>{{data.onlineJobSite.Web}}</td>
+                    <td>{{data.onlineJobSite.Response ? 'Yes' : 'No'}}</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm rounded-circle" href="#!/editOnlineJobSite/{{data.onlineJobSite.OnlineJobSiteId}}"><i class="fa fa-pencil"></i></a>
+                        <button class="btn btn-danger btn-sm rounded-circle" ng-click="deleteCompany($index)"><i class="fa fa-trash"></i></button>
+                    </td>
+                    
+                    
+                </tr>
+                <tr ng-if="data.isExpanded">
+                    <td>&nbsp;</td>
+                    <td colspan="6">
+                        <div class="d-flex align-items-baseline mb-1">
+                            <h3 class="card-subtitle">Job Advertisement</h3>
+                            <!--<a ng-href="#!/createProduct" class="btn btn-success btn-sm ml-auto"><i class="fa fa-plus"></i></a>-->
+                        </div>
+                        <table class="table table-bordered table-info">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Advertisement Name</th>
+                                    <th>Post</th>
+                                    <!--<th>...</th>-->
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="jobadvertisement in data.onlineJobSite.JobAdvertisements">
+                                <tr>
+                                    <td>{{jobadvertisement.JobAdvertisementName}}</td>
+                                    <td>{{jobadvertisement.Post}}</td>
+
+                                    <!--<td>
+                                        <a ng-href="#!/editJobAdvertisement/{{//jobadvertisement.JobAdvertisementId}}" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
+                                        <a ng-href="#!/deleteJobAdvertisement/{{//jobadvertisement.JobAdvertisementId}}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                    </td>-->
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr ng-if="data.isExpanded">
+                    <td>&nbsp;</td>
+                    <td colspan="6">
+                        
+                        
+                        <div class="d-flex align-items-baseline mb-1">
+                            <h3 class="card-subtitle">Register Applicant</h3>
+                            <a ng-href="#!/createRegister" class="btn btn-success btn-sm ml-auto"><i class="fa fa-plus">Single Create</i></a>
+                        </div>
+                        <table class="table table-bordered table-warning">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Registered Name</th>
+                                    <th>Contact Email</th>
+
+                                    <th>Single Edit & Del</th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="registerapplicant in data.onlineJobSite.RegisterApplicants">
+                                <tr>
+                                    <td>{{registerapplicant.RegisterApplicantName}}</td>
+                                    <td>{{registerapplicant.ContactEmail}}</td>
+
+                                    <td>
+                                        <a ng-href="#!/editRegister/{{registerapplicant.RegisterApplicantId}}" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
+                                       
+                                        <a class="btn btn-danger btn-sm rounded-circle" ng-click="delCompanyService(registerapplicant.OnlineJobSiteId,registerapplicant.RegisterApplicantId, $index)"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+
+
+            </tbody>
+
+
+        </table>
+    </div>
+
+</div>

@@ -1,0 +1,72 @@
+﻿<div ng-controller="createRegisterCtrl">
+    <div ng-if="companyInsertMsg" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> {{companyInsertMsg}}.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="card" style="background-color:lightblue">
+        <div class="card-header">
+            <h3>Insert Register</h3>
+        </div>
+        <div class="card-body">
+            <div class="card-text">
+                <form name="frmCreateService" ng-submit="insertService()" novalidate>
+                    <div class="form-group row">
+                        <label class="col-form-label col-form-label-sm col-2">Online Job Site</label>
+                        <div class="col-4">
+                            <!--/////////problem-->
+                            <select name="onlineJobSiteId" ng-options="item.onlineJobSite.OnlineJobSiteId as item.onlineJobSite.OnlineJobSiteName for item in model.onlineJobSites" class="form-control form-control-sm" ng-model="newService.OnlineJobSiteId" required>
+                                <option value="">Select</option>
+                            </select>
+                            <div class="text-danger" ng-show="frmCreateService.onlineJobSiteId.$error" ng-if="frmCreateService.onlineJobSiteId.$touched">
+                                <div ng-show="frmCreateService.onlineJobSiteId.$error.required">This field is requred.</div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label col-form-label-sm col-2">Register Applicant Name</label>
+                        <div class="col-4">
+                            <input name="registerApplicantName" type="text" class="form-control form-control-sm" ng-model="newService.RegisterApplicantName" required maxlength="50" />
+                            <div class="text-danger" ng-show="frmCreateService.registerApplicantName.$error" ng-if="frmCreateService.registerApplicantName.$touched">
+                                <div ng-show="frmCreateService.registerApplicantName.$error.required">This field is requred.</div>
+                                <div ng-show="frmCreateService.registerApplicantName.$error.maxlength">This field is requred.</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label col-form-label-sm col-2">Email</label>
+                        <div class="col-4">
+                            <input name="contactEmail" type="email" class="form-control form-control-sm" ng-model="newService.ContactEmail" required />
+                            <div class="text-danger" ng-show="frmCreateService.contactEmail.$error" ng-if="frmCreateService.contactEmail.$touched">
+                                <div ng-show="frmCreateService.contactEmail.$error.required">This field is requred.</div>
+                                <div ng-show="frmCreateService.contactEmail.$error.EmailAddress">This field is requred.</div>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--<div class="form-group row">
+                        <label class="col-form-label col-form-label-sm col-2">Is Contactual</label>
+                        <div class="col-4">
+                            <input name="isContactual" type="email" ng-model="newService.IsContactual" />
+
+                        </div>
+                    </div>-->
+                    <div class="form-group row">
+
+                        <div class="col-4 offset-2">
+                            <button type="submit" class="btn btn-primary" ng-disabled="frmCreateService.$invalid">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a ng-href="#!/onlinejobsites"><i class="fa fa-long-arrow-left"></i> Back to Online Job Site</a>
+        </div>
+    </div>
+</div>

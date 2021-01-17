@@ -1,0 +1,207 @@
+﻿<div ng-controller="editOnlineJobSiteCtrl">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Edit Online Job SIte</h2>
+        </div>
+        <div class="card-body" style="background-color:lightcyan">
+            <div class="card-text">
+
+                <form name="frmEditCompany" id="frmEditCompany" ng-submit="editDone(frmEditCompany)" novalidate>
+                    <h3>Job Site Details</h3>
+                    <div class="form-group row">
+                        <label for="" class="col-form-label col-form-label-sm col-2">OnlineJobSite Name</label>
+                        <div class="col-4">
+                            <input name="onlineJobSiteName"
+                                   ng-model="companyToEdit.OnlineJobSiteName"
+                                   class="form-control form-control-sm"
+                                   ng-maxlength="50"
+                                   required />
+                            <div ng-messages="frmEditCompany.onlineJobSiteName.$error"
+                                 ng-show="frmEditCompany.onlineJobSiteName.$invalid && !frmEditCompany.onlineJobSiteName.$pristine">
+                                <div class="text-danger" ng-message="required">
+                                    This field is requred.
+                                </div>
+                                <div class="text-danger" ng-message="maxlength">
+                                    Field value too long.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="" class="col-form-label col-form-label-sm col-2">Started Journey</label>
+                        <div class="col-4">
+                            <div class="input-group">
+                                <input type="date" name="startedJourney" ng-model="companyToEdit.StartedJourney"
+                                       class="form-control form-control-sm"
+                                       close-text="Close" />
+
+                                <span class="input-group-btn">
+                                    <button type="button"
+                                            class="btn btn-secondary btn-sm">
+                                        <i class="fa fa-calendar"></i>
+                                    </button>
+                                </span>
+                            </div>
+
+                            <div ng-messages="frmEditCompany.startedJourney.$error"
+                                 ng-show="frmEditCompany.startedJourney.$invalid && !frmEditCompany.startedJourney.$pristine">
+                                <div class="text-danger" ng-message="required">
+                                    This field is requred.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="" class="col-form-label col-form-label-sm col-2">Website</label>
+                        <div class="col-4">
+                            <input type="url"
+                                   name="web"
+                                   ng-model="companyToEdit.Web"
+                                   class="form-control form-control-sm"
+                                   required />
+                            <div ng-messages="frmEditCompany.web.$error"
+                                 ng-show="frmEditCompany.web.$invalid && frmEditCompany.web.$touched">
+                                <div class="text-danger" ng-message="required">
+                                    This field is requred.
+                                </div>
+                                <div class="text-danger" ng-message="url">
+                                    Url must start with http:// or https://
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-form-label col-form-label-sm col-2">Response Instantly</label>
+                        <div class="col-4">
+                            <input type="checkbox"
+                                   name="response"
+                                   ng-model="companyToEdit.Response"
+                                   class="form-control form-control-sm"/>
+                                   <!--required--> 
+                            <!--<div ng-messages="frmEditCompany.response.$error"
+                                 ng-show="frmEditCompany.web.$invalid && frmEditCompany.response.$touched">
+                                <div class="text-danger" ng-message="required">
+                                    This field is requred.
+                                </div>
+                                
+                            </div>-->
+                        </div>
+                    </div>
+                    <div class="d-flex mb-1">
+                        <h3 class="card-subtitle">Job Advertisement</h3>
+                        <span style="flex:auto"></span>
+
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Advertisement Name</th>
+                                <th>Post</th>
+                                <th style="width:90px" class="text-center">
+
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in companyToEdit.JobAdvertisements">
+                                <td>
+                                    <input name="jobAdvertisementName[{{$index}}]"
+                                           class="form-control form-control-sm"
+                                           ng-model="item.JobAdvertisementName"
+                                           required />
+                                    <div ng-messages="frmEditCompany['jobAdvertisementName[' + $index + ']'].$error"
+                                         ng-show="frmEditCompany['jobAdvertisementName[' + $index + ']'].$invalid && !frmEditCompany['jobAdvertisementName[' + $index + ']'].$pristine">
+                                        <div class="text-danger" ng-message="required">
+                                            This field is requred
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <select name="post[{{$index}}]"
+                                            class="form-control form-control-sm"
+                                            ng-model="item.Post"
+                                            required>
+                                        <option value="">Select</option>
+                                        <option value="Manager">Manager</option>
+                                        <option value="MTO">Mgm Trainee</option>
+                                        <option value="Senior">Senior</option>
+                                        <option value="Junior">Junior</option>
+                                        <option value="Officer">Officer</option>
+                                        <option value="ItProfessional">It Professional</option>
+                                    </select>
+                                    <div ng-messages="frmEditCompany['post[' + $index + ']'].$error"
+                                         ng-show="frmEditCompany['post[' + $index + ']'].$invalid && !frmEditCompany['post[' + $index + ']'].$pristine">
+                                        <div class="text-danger" ng-message="required">
+                                            This field is requred.
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+
+                                    <button type="button" ng-click="deleteCompanyProduct($index)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <div class="d-flex mb-1">
+                        <h3 class="card-subtitle">Register Applicant</h3>
+                        <span style="flex:auto"></span>
+
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Register Name</th>
+                                <th>Email</th>
+                                <th style="width:90px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in companyToEdit.RegisterApplicants">
+                                <td>
+                                    <input name="registerApplicantName[{{$index}}]"
+                                           class="form-control form-control-sm"
+                                           ng-model="item.RegisterApplicantName"
+                                           required />
+                                    <div ng-messages="frmEditCompany['registerApplicantName[' + $index + ']'].$error"
+                                         ng-show="frmEditCompany['registerApplicantName[' + $index + ']'].$invalid && !frmEditCompany['registerApplicantName[' + $index + ']'].$pristine">
+                                        <div class="text-danger" ng-message="required">
+                                            This field is requred
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="email" name="contactEmail[{{$index}}]"
+                                           class="form-control form-control-sm"
+                                           ng-model="item.ContactEmail"
+                                           required />
+                                    
+                                    <div ng-messages="frmEditCompany['contactEmail[' + $index + ']'].$error"
+                                         ng-show="frmEditCompany['contactEmail[' + $index + ']'].$invalid && !frmEditCompany['contactEmail[' + $index + ']'].$pristine">
+                                        <div class="text-danger" ng-message="required">
+                                            This field is requred
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+
+                                    <button type="button" ng-click="deleteCompanyService($index)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="d-flex align-items-baseline">
+                <a ng-href="#!/onlinejobsites"><i class="fa fa-long-arrow-left"></i> Back to Online Job Site</a>
+                <span style="flex:auto"></span>
+                <button type="submit" class="btn btn-primary" ng-disabled="frmEditCompany.$invalid" form="frmEditCompany">Update All</button>
+            </div>
+        </div>
+    </div>
+</div>

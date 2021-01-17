@@ -1,0 +1,64 @@
+﻿<div ng-controller="registerController">
+    <div ng-if="companyInsertMsg" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> {{companyInsertMsg}}.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3>Edit Register</h3>
+        </div>
+        <div class="card-body" style="background-color:lightcyan">
+            <div class="card-text">
+                <form name="frmEditService" ng-submit="updateService()" novalidate>
+                    <div class="form-group row">
+                        <label class="col-form-label col-form-label-sm col-2">Online Job Site</label>
+                        <div class="col-4">
+                            <select name="onlineJobSiteId" ng-options="item.onlineJobSite.OnlineJobSiteId as item.onlineJobSite.OnlineJobSiteName for item in model.onlineJobSites" class="form-control form-control-sm" ng-model="currentService.OnlineJobSiteId" required>
+                                <option value="">Select</option>
+                            </select>
+                            <div class="text-danger" ng-show="frmEditService.onlineJobSiteId.$error">
+                                <div ng-show="frmEditService.onlineJobSiteId.$error.required">This field is requred.</div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label col-form-label-sm col-2">Register Applicant Name</label>
+                        <div class="col-4">
+                            <input name="registerApplicantName" type="text" class="form-control form-control-sm" ng-model="currentService.RegisterApplicantName" required maxlength="50" />
+                            <div class="text-danger" ng-show="frmEditService.registerApplicantName.$error">
+                                <div ng-show="frmEditService.registerApplicantName.$error.required">This field is requred.</div>
+                                <div ng-show="frmEditService.registerApplicantName.$error.maxlength">This field is requred.</div>
+                            </div>
+                        </div>
+
+                    </div>
+                   
+                    <div class="form-group row">
+                        <label class="col-form-label col-form-label-sm col-2">Email</label>
+                        <div class="col-4">
+                            <input name="contactEmail" type="email" class="form-control form-control-sm" ng-model="currentService.ContactEmail" required/>
+                            <div class="text-danger" ng-show="frmCreateService.contactEmail.$error" ng-if="frmCreateService.contactEmail.$touched">
+                                <div ng-show="frmCreateService.contactEmail.$error.required">This field is requred.</div>
+                                <!--<div ng-show="frmCreateService.contactEmail.$error.email">This field is requred.</div>-->
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
+
+                        <div class="col-4 offset-2">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a ng-href="#!/onlinejobsites"><i class="fa fa-long-arrow-left"></i> Back to Online Job Site</a>
+        </div>
+    </div>
+</div>
